@@ -1,0 +1,61 @@
+services:
+  # Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: ${PROJECT_NAME}_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./data/pg_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:5432"
+
+  # Cache & Broker
+  redis:
+    image: redis:7-alpine
+    container_name: ${PROJECT_NAME}_redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - ./data/redis_data:/data
+    ports:
+      - "${REDIS_PORT}:6379"
+
+  # Core backend
+  core:
+    build:
+      context: ./services/core
+      dockerfile: Dockerfile
+    container_name: ${PROJECT_NAME}_core
+    restart: unless-stopped
+    volumes:
+      - ./services/core:/var/www/html
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "${CORE_PORT}:8000"
+
+  # Frontend
+  web:
+    build:
+      context: ./clients/web
+      dockerfile: Dockerfile
+    container_name: ${PROJECT_NAME}_web
+    restart: unless-stopped
+    volumes:
+      - ./clients/web:/app
+      - /app/node_modules
+    depends_on:
+      - core
+    ports:
+      - "${WEB_PORT}:5173"
+    environment:
+      - VITE_API_URL=${CORE_URL}
+
+networks:
+  default:
+    name: ${PROJECT_NAME}_network

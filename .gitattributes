@@ -1,0 +1,35 @@
+# Line endings settings
+* text=auto eol=lf
+
+# Diff rules for different languages
+*.php diff=php
+*.blade.php diff=html
+*.css diff=css
+*.scss diff=css
+*.html diff=html
+*.md diff=markdown
+*.js diff=javascript
+*.jsx diff=javascript
+*.ts diff=javascript
+*.tsx diff=javascript
+*.go diff=golang
+*.py diff=python
+
+# Binary files
+*.webp binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.svg text
+
+# Exclude from export
+/.github export-ignore
+/services/core/CHANGELOG.md export-ignore
+/services/core/.styleci.yml export-ignore
+
+# Generated files
+package-lock.json linguist-generated
+composer.lock linguist-generated

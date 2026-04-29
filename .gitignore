@@ -1,0 +1,73 @@
+# System & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.zed/
+.fleet/
+.nova/
+*.sw?
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Database & Storage data (local volumes)
+/data/pg_data/
+/data/redis_data/
+/data/s3_data/
+
+# Env files
+.env
+.env.backup
+.env.production
+/auth.json
+
+# Frontend (clients/web)
+/clients/web/node_modules/
+/clients/web/dist/
+/clients/web/dist-ssr/
+/clients/web/logs/
+/clients/web/*.log
+/clients/web/npm-debug.log*
+/clients/web/yarn-debug.log*
+/clients/web/yarn-error.log*
+/clients/web/pnpm-debug.log*
+/clients/web/lerna-debug.log*
+/clients/web/*.local
+
+# Backend Laravel (services/core)
+/services/core/vendor/
+/services/core/node_modules/
+/services/core/public/build/
+/services/core/public/hot/
+/services/core/public/storage/
+/services/core/storage/*.key
+/services/core/storage/pail/
+/services/core/storage/framework/cache/data/*
+/services/core/storage/framework/sessions/*
+/services/core/storage/framework/views/*
+/services/core/storage/logs/*.log
+/services/core/bootstrap/cache/*.php
+/services/core/.phpunit.cache/
+/services/core/.phpunit.result.cache
+/services/core/.phpactor.json
+/services/core/Homestead.json
+/services/core/Homestead.yaml
+/services/core/.env
+
+# Backend Go (services/stream)
+/services/stream/bin/
+/services/stream/dist/
+/services/stream/*.exe
+/services/stream/*.test
+/services/stream/__debug_bin
+
+# Backend Python (services/ml)
+/services/ml/__pycache__/
+/services/ml/*.py[cod]
+/services/ml/*$py.class
+/services/ml/.venv/
+/services/ml/env/
+/services/ml/venv/
+/services/ml/.pytest_cache/
