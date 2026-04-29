@@ -1,0 +1,31 @@
+root = true
+
+# Global settings
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# Frontend settings
+[{*.js,*.jsx,*.ts,*.tsx,*.json,*.scss,*.css,*.html}]
+indent_size = 2
+
+# Go settings
+[{*.go,go.mod,go.sum}]
+indent_style = tab
+indent_size = 4
+
+# Python settings
+[{*.py}]
+indent_size = 4
+
+# Config files settings
+[{*.yml,*.yaml,*.md}]
+indent_size = 2
+
+# Makefile settings
+[{Makefile,*.mk}]
+indent_style = tab
