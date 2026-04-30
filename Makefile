@@ -37,10 +37,8 @@ key:
 
 # Full initial setup for laravel
 setup-core:
-	docker exec -it ${PROJECT_NAME}_core composer install
 	docker exec -it ${PROJECT_NAME}_core php artisan key:generate
 	docker exec -it ${PROJECT_NAME}_core php artisan migrate
-
 
 # Database migrate
 migrate:

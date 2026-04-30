@@ -27,6 +27,7 @@ Thumbs.db
 /clients/web/node_modules/
 /clients/web/dist/
 /clients/web/dist-ssr/
+/clients/web/.vite/
 /clients/web/logs/
 /clients/web/*.log
 /clients/web/npm-debug.log*
@@ -35,6 +36,7 @@ Thumbs.db
 /clients/web/pnpm-debug.log*
 /clients/web/lerna-debug.log*
 /clients/web/*.local
+
 
 # Backend Laravel (services/core)
 /services/core/vendor/
