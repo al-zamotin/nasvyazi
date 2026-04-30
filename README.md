@@ -1,29 +1,27 @@
 # NASVYAZI (НаСвязи)
 
-Современная социальная сеть с микросервисной архитектурой, построенная на стеке React, Laravel, Go и Python.
+Современная социальная сеть с микросервисной архитектурой (Laravel, React, Go, Python).
 
-## Архитектура системы
+## Архитектура
 
-Проект реализован как монорепозиторий, разделенный на независимые сервисы, объединенные через Docker и Nginx:
+Проект построен как монорепозиторий с разделением зон ответственности:
 
-- **Frontend (Web):** React (TypeScript) + Vite + SCSS Modules;
-- **Core Service:** Laravel 12 (PHP 8.3) — основная бизнес-логика, API и работа с СУБД;
-- **Stream Service:** Go — real-time уведомления, чаты и WebSockets;
-- **ML Service:** Python (FastAPI) — система рекомендаций и AI-модерация контента.
+- **Core (Laravel 12):** Основная бизнес-логика и API;
+- **Web (React + Vite):** Клиентское SPA-приложение;
+- **Stream (Go):** Реалтайм-сервис (будет добавлено позже);
+- **ML (FastAPI):** AI-модерация и рекомендации (будет добавлено позже).
 
 ## Технологический стек
 
-Технологический стек проекта представляет собой следующее:
-
-- **Инфраструктура:** Docker, Docker Compose, Nginx;
-- **Базы данных:** PostgreSQL (основная), Redis (кэш/брокер), MinIO (S3 хранилище медиа);
-- **Управление:** GNU Make (Makefile).
+- **Backend:** PHP 8.3, Laravel 12, PostgreSQL 16.
+- **Frontend:** TypeScript, React, Axios, SCSS Modules.
+- **Infra:** Docker Compose, Redis, Nginx, Makefile.
 
 ## Быстрый старт
 
 ### 1. Подготовка окружения
 
-Клонируйте репозиторий и подготовьте файлы конфигурации:
+Клонируйте репозиторий и создайте файлы конфигурации из шаблонов:
 
 ```bash
 git clone https://github.com/al-zamotin/nasvyazi
@@ -32,38 +30,38 @@ cp .env.example .env
 cp services/core/.env.example services/core/.env
 ```
 
-### 2. Запуск и установка
+### 2. Установка зависимостей
 
-Соберите контейнеры и установите все зависимости:
-
-```bash
-make build    # Сборка и запуск контейнеров
-make install  # Установка composer и npm пакетов внутри контейнеров
-```
-
-### 3. Инициализация Laravel
-
-Настройте ключи безопасности и базу данных:
+Для корректной работы IDE и синхронизации с Docker установите пакеты локально:
 
 ```bash
-make setup-core
+# Backend
+composer install --project-directory=services/core
+
+# Frontend
+npm install --prefix clients/web
 ```
 
-После выполнения этих шагов приложение будет доступно:
+### 3. Запуск проекта
+
+Соберите образы и инициализируйте базу данных:
+
+```bash
+make build # Сборка и запуск контейнеров
+make setup-core # Генерация ключей и запуск миграций
+```
+
+Приложение будет доступно по адресам:
 
 - **Frontend:** [http://localhost:5173](http://localhost:5173)
 - **Backend API:** [http://localhost:8000](http://localhost:8000)
 
-## Структура репозитория
+## Команды управления (Makefile)
 
-Структура репозитория представляет собой следующее:
-
-- `/clients/web` — Клиентское SPA приложение;
-- `/services/core` — Ядро системы (Laravel);
-- `/services/stream` — Real-time сервис (Go);
-- `/services/ml` — AI сервис (Python);
-- `/gateway/nginx` — Конфигурация единой точки входа;
-- `/data` — Локальные хранилища БД и медиа (игнорируются Git).
+- `make up` / `make down` — запуск и остановка проекта;
+- `make shell-core` — терминал внутри контейнера Laravel;
+- `make shell-web` — терминал внутри контейнера React;
+- `make migrate` — запуск миграций БД.
 
 ---
 
